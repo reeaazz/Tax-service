@@ -44,10 +44,17 @@ interface Amendment {
 // Combined type for the request
 type TransactionRequest = SaleEvent | TaxPaymentEvent;
 
-// Data storage
-const salesEvents: SaleEvent[] = [];
-const taxPaymentEvents: TaxPaymentEvent[] = [];
-const amendments: Record<string, Amendment[]> = {}; // Store multiple amendments as an array
+// Data storage - export for testing
+export let salesEvents: SaleEvent[] = [];
+export let taxPaymentEvents: TaxPaymentEvent[] = [];
+export let amendments: Record<string, Amendment[]> = {}; // Store multiple amendments as an array
+
+// Reset function for testing
+export const resetData = () => {
+    salesEvents = [];
+    taxPaymentEvents = [];
+    amendments = {};
+};
 
 // Helper function to calculate tax for an item
 const calculateTax = (cost: number, taxRate: number): number => {
@@ -160,8 +167,13 @@ app.patch('/sale', (req: Request, res: Response) => {
     res.status(202).send();
 });
 
-// Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    logger.info(`Server running on port ${PORT}`);
-});
+// Export app for testing
+export default app;
+
+// Start the server if this file is run directly
+if (require.main === module) {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+        logger.info(`Server running on port ${PORT}`);
+    });
+}
