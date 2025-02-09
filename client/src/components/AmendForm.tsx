@@ -42,7 +42,7 @@ const AmendForm: React.FC = () => {
     try {
       // Make API call to amend the sale
       const response = await axios.patch('/sale', amendSale);
-      setAmendResponse('Sale amended successfully!');
+      setAmendResponse(`Status: ${response.status},Sale amended successfully!`);
       resetForm(); // Reset the form after successful amendment
     } catch (error: any) {
       // Handle errors gracefully

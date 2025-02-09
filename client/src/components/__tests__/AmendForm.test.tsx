@@ -77,7 +77,7 @@ describe('AmendForm Component', () => {
 
     // Check success message
     await waitFor(() => {
-      expect(screen.getByText('Sale amended successfully!')).toBeInTheDocument();
+      expect(screen.getByText(/Sale amended successfully!/)).toBeInTheDocument();
     });
 
     // Verify API call
@@ -149,7 +149,7 @@ describe('AmendForm Component', () => {
 
     // Wait for success message first
     await waitFor(() => {
-      expect(screen.getByText('Sale amended successfully!')).toBeInTheDocument();
+      expect(screen.getByText(/Sale amended successfully!/)).toBeInTheDocument();
     });
 
     // Then check if form is reset
